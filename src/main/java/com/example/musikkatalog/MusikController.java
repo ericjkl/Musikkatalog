@@ -2,13 +2,9 @@ package com.example.musikkatalog;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MusikController {
@@ -24,8 +20,8 @@ public class MusikController {
         return repository.findAll();
     }
 
-    @PostMapping("/musikstuecke")
-    Musikstueck newMusikstueck(@RequestBody Musikstueck newMusikstueck) {
+    @PostMapping(path = "/musikstuecke", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    Musikstueck newMusikstueck(Musikstueck newMusikstueck) {
         return repository.save(newMusikstueck);
     }
 
