@@ -15,8 +15,7 @@ class LoadDatabase {
     {
 
         return args -> {
-            log.info("Preloading " + repository.save(new Musikstueck("CD", "Niemand", "Test", "Pop", 2000)));
-            log.info("Preloading " + repository.save(new Musikstueck("Schallplatte", "Moneyboy", "Monte Carlo", "Rap", 2002)));
+            log.info("Application started");
         };
     }
 }
