@@ -2,14 +2,35 @@
 <html>
 <head>
     <title>Musikstueck loeschen</title>
+    <script>
+        function getInputValue(){
+            // Selecting the input element and get its value
+            let id = document.getElementById("stueck").value;
+            console.log(id);
+            //document.getElementById("myAction").action = "/musikstuecke/{${id}";
+            //const myDataObject ={ userId: 1}
+            fetch(`/musikstuecke/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        alert("DELETE fehlgeschlagen")
+                    }
+                })
+        }
+
+    </script>
 </head>
 <body>
-<form action="/musikstuecke/id">
+
     <label>Welches Musikstueck moechtest du loeschen?</label><br><br>
     <label>Id:</label><br>
-    <input type="number" id=id /><br>
-    <input type="submit" value="Musikstueck loeschen" />
-</form>
+    <input type="text" id="stueck"/><br>
+    <button type="button" onclick="getInputValue();">Submit</button>
+
 
 </body>
 </html>
