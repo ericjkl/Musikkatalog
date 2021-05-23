@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="musikstuecke.css">
+</head>
+<body>
+
+<script>
+  function getMusik(){
+    let id = document.getElementById("id").value;
+    fetch(`/musikstuecke/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(responseJSON => {
+      if (!responseJSON.ok) {
+        alert("GET fehlgeschlagen")
+      } else {
+        responseJSON.json().then((data)=>{
+          console.log(data)
+          document.getElementById("datentraeger").value = data.datentraeger
+          document.getElementById("genre").value = data.genre
+          document.getElementById("interpret").value = data.interpret
+          document.getElementById("name").value = data.name
+          document.getElementById("jahr").value = data.erscheinungsjahr
+          document.getElementById("input-fields").style.display = "block"
+        })
+
+      }
+    })
+  }
+
+  function saveMusik() {
+    let id = document.getElementById("id").value;
+    fetch(`/musikstuecke/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        datentraeger: document.getElementById("datentraeger").value,
+        genre: document.getElementById("genre").value,
+        interpret: document.getElementById("interpret").value,
+        name: document.getElementById("name").value,
+        erscheinungsjahr: document.getElementById("jahr").value,
+      })
+    })
+    .then(responseJSON => {
+      if (!responseJSON.ok) {
+        alert("PUT fehlgeschlagen")
+      } else {
+        responseJSON.json().then((data)=>{
+          console.log(data)
+        })
+      }
+    })
+  }
+
+</script>
+
+<input type="text" id="id"/><br>
+<button type="button" onclick="getMusik();">Bearbeiten</button>
+
+  <div id="input-fields" style="display: none">
+    Datentraeger : <input type="text" name="datentraeger" id="datentraeger"/>
+    Interpret : <input type="text" name="interpret" id="interpret"/>
+    Name : <input type="text" name="name" id="name"/>
+    Genre : <input type="text" name="genre" id="genre"/>
+    Erscheinungsjahr : <input type="number" name="erscheinungsjahr" id="jahr"/>
+    <button type="button" onclick="saveMusik();">Speichern</button>
+  </div>
+
+</body>
+</html>
