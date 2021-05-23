@@ -16,6 +16,7 @@ class LoadDatabase {
 
         return args -> {
             log.info("Application started");
+            repository.save(new Musikstueck("CD", "Test", "Test", "Test", 1900));
         };
     }
 }
