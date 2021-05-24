@@ -6,9 +6,6 @@
         function getInputValue(){
             // Selecting the input element and get its value
             let id = document.getElementById("stueck").value;
-            console.log(id);
-            //document.getElementById("myAction").action = "/musikstuecke/{${id}";
-            //const myDataObject ={ userId: 1}
             fetch(`/musikstuecke/${id}`, {
                 method: 'DELETE',
                 headers: {
